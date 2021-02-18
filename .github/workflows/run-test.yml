@@ -22,7 +22,7 @@ jobs:
           LOG_COUNT_UTIL_TESTING="true" python setup.py develop
       - name: Run pytest
         run: |
-          pip install pytest pytest-cov
+          pip install pytest pytest-cov pandas
           pytest --cov=./log_count_util tests/
       - name: Generate coverage (ubuntu)
         run: |
@@ -35,4 +35,4 @@ jobs:
           verbose: false
           env_vars: OS,PYTHON
           name: codecov-umbrella
-          fail_ci_if_error: false
+          fail_ci_if_error: true
