@@ -76,7 +76,7 @@ template <typename Scalar, typename IDType>
 py::array_t<int64_t> sum_records_within_interval(
     py::array_t<IDType> query_ids, py::array_t<int64_t> query_datetime,
     py::array_t<IDType> target_ids, py::array_t<int64_t> target_datetime,
-    py::array_t<int64_t> target_values, int64_t days) {
+    py::array_t<Scalar> target_values, int64_t days) {
   const auto query_id_size = query_ids.request(false).size;
   const auto target_id_size = target_ids.request(false).size;
 

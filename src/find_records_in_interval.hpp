@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <exception>
 #include <functional>
+#include <iostream>
 #include <stdexcept>
 
 template <typename Scalar>
