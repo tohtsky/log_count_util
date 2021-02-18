@@ -1,0 +1,38 @@
+
+name: Full Test & Upload coverage
+on: [push, pull_request]
+jobs:
+  run_pytest_upload_coverage:
+    runs-on: ubuntu-latest
+    env:
+      OS: ubuntu-latest
+      PYTHON: "3.7"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@master
+        with:
+          python-version: 3.7
+      - name: Build log_count_util (ubuntu)
+        run: |
+          pip install --upgrade pip
+          sudo apt-get install lcov
+          LOG_COUNT_UTIL_TESTING="true" python setup.py develop
+      - name: Run pytest
+        run: |
+          pip install pytest pytest-cov
+          pytest --cov=./log_count_util tests/
+      - name: Generate coverage (ubuntu)
+        run: |
+          coverage xml
+          lcov -d `pwd` -c -o coverage.info
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          files: ./coverage.xml,./coverage.info
+          verbose: false
+          env_vars: OS,PYTHON
+          name: codecov-umbrella
+          fail_ci_if_error: false

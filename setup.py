@@ -11,11 +11,7 @@ SETUP_DIRECTORY = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(SETUP_DIRECTORY, "Readme.md")) as ifs:
     LONG_DESCRIPTION = ifs.read()
 
-install_requires = (
-    [
-        "numpy >= 1.20",
-    ],
-)
+install_requires = (["numpy >= 1.20", 'typing-extensions; python_version < "3.8.0"'],)
 
 setup_requires = ["pybind11>=2.4", "setuptools_scm"]
 TESTING = os.environ.get("LOG_COUNT_UTIL_TESTING", None) is not None
