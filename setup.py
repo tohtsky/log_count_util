@@ -13,13 +13,12 @@ with open(os.path.join(SETUP_DIRECTORY, "Readme.md")) as ifs:
 
 install_requires = (
     [
-        "numpy >= 1.11",
+        "numpy >= 1.14",
     ],
 )
 
 setup_requires = ["pybind11>=2.4", "setuptools_scm"]
 TESTING = os.environ.get("LOG_COUNT_UTIL_TESTING", None) is not None
-
 
 
 class get_pybind_include(object):

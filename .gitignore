@@ -8,3 +8,4 @@ log_count_util.egg-info
 stubs
 **.pyc
 **settings.json
+.python-version
