@@ -73,7 +73,7 @@ py::array_t<int64_t> find_records_within_interval_within_query(
 }
 
 template <typename Scalar, typename IDType>
-py::array_t<int64_t> sum_records_within_interval(
+py::array_t<Scalar> sum_records_within_interval(
     py::array_t<IDType> query_ids, py::array_t<int64_t> query_datetime,
     py::array_t<IDType> target_ids, py::array_t<int64_t> target_datetime,
     py::array_t<Scalar> target_values, int64_t days) {

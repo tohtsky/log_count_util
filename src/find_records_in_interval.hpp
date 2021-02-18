@@ -29,36 +29,38 @@ inline void find_records_within_interval_with_query(
   assert_sorted(query_ptr, query_size);
   assert_sorted(target_ptr, target_size);
 
-  int64_t L = target_size - 1;
-  int64_t U = target_size - 1;
+  auto t_upper_examine_ptr = target_ptr + (target_size - 1);
+  auto t_lower_examine_ptr = target_ptr + (target_size - 1);
+
   for (int64_t i = query_size - 1; i >= 0; i--) {
     const Scalar t_upper = query_ptr[i];
     const Scalar t_lower = query_ptr[i] - days;
-    if (L >= 0) {
+    if (t_lower_examine_ptr >= target_ptr) {
       while (true) {
-        if (target_ptr[L] < t_lower) {
+        if ((*t_lower_examine_ptr) < t_lower) {
           break;
         } else {
-          --L;
-          if (L < 0) {
+          t_lower_examine_ptr--;
+          if (t_lower_examine_ptr < target_ptr) {
             break;
           }
         }
       }
     }
-    if (U >= 0) {
+    if (t_upper_examine_ptr >= target_ptr) {
       while (true) {
-        if (target_ptr[U] < t_upper) {
+        if ((*t_upper_examine_ptr) < t_upper) {
           break;
         } else {
-          --U;
-          if (U < 0) {
+          t_upper_examine_ptr--;
+          if (t_upper_examine_ptr < target_ptr) {
             break;
           }
         }
       }
     }
-    target_cnt[i] = U - L;
+    target_cnt[i] =
+        static_cast<int64_t>(t_upper_examine_ptr - t_lower_examine_ptr);
   }
 }
 
