@@ -5,3 +5,6 @@ pybind11
 tmp
 log_count_util.egg-info
 **.so
+stubs
+**.pyc
+**settings.json
