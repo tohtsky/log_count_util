@@ -13,7 +13,7 @@ with open(os.path.join(SETUP_DIRECTORY, "Readme.md")) as ifs:
 
 install_requires = (
     [
-        "numpy >= 1.14",
+        "numpy >= 1.20",
     ],
 )
 

@@ -61,6 +61,48 @@ inline void find_records_within_interval_with_query(
   }
 }
 
+template <typename Scalar, typename ValueType>
+inline void sum_records_within_interval_with_query(
+    const Scalar *query_ptr, const std::int64_t query_size,
+    const Scalar *target_ptr, const ValueType *target_values,
+    const std::int64_t target_size, const Scalar &days, ValueType *output_ptr) {
+  assert_sorted(query_ptr, query_size);
+  assert_sorted(target_ptr, target_size);
+
+  int64_t L = target_size - 1;
+  int64_t U = target_size - 1;
+  ValueType val = 0;
+  for (int64_t i = query_size - 1; i >= 0; i--) {
+    const Scalar t_upper = query_ptr[i];
+    const Scalar t_lower = query_ptr[i] - days;
+    if (L >= 0) {
+      while (true) {
+        if (target_ptr[L] < t_lower) {
+          break;
+        } else {
+          val += target_values[L--];
+          if (L < 0) {
+            break;
+          }
+        }
+      }
+    }
+    if (U >= 0) {
+      while (true) {
+        if (target_ptr[U] < t_upper) {
+          break;
+        } else {
+          val -= target_values[U--];
+          if (U < 0) {
+            break;
+          }
+        }
+      }
+    }
+    output_ptr[i] = val;
+  }
+}
+
 template <typename Scalar>
 inline void find_last_record_index_with_query(const Scalar *query_ptr,
                                               const std::int64_t query_size,
