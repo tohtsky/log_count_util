@@ -9,3 +9,4 @@ stubs
 **.pyc
 **settings.json
 .python-version
+.eggs
