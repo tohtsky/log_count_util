@@ -72,7 +72,11 @@ inline void sum_records_within_interval_with_query(
 
   int64_t L = target_size - 1;
   int64_t U = target_size - 1;
-  ValueType val = 0;
+  ValueType val_plus = 0;
+  ValueType val_minus = 0;
+  const ValueType *target_values_plus = target_values + L;
+  const ValueType *target_values_minus = target_values + U;
+
   for (int64_t i = query_size - 1; i >= 0; i--) {
     const Scalar t_upper = query_ptr[i];
     const Scalar t_lower = query_ptr[i] - days;
@@ -81,7 +85,8 @@ inline void sum_records_within_interval_with_query(
         if (target_ptr[L] < t_lower) {
           break;
         } else {
-          val += target_values[L--];
+          val_plus += *(target_values_plus--);
+          --L;
           if (L < 0) {
             break;
           }
@@ -93,14 +98,15 @@ inline void sum_records_within_interval_with_query(
         if (target_ptr[U] < t_upper) {
           break;
         } else {
-          val -= target_values[U--];
+          val_minus += *(target_values_minus--);
+          --U;
           if (U < 0) {
             break;
           }
         }
       }
     }
-    output_ptr[i] = val;
+    output_ptr[i] = val_plus - val_minus;
   }
 }
 
