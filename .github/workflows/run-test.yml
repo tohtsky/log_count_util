@@ -32,7 +32,7 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           files: ./coverage.xml,./coverage.info
-          verbose: true
+          verbose: false
           env_vars: OS,PYTHON
           name: codecov-umbrella
           fail_ci_if_error: true
