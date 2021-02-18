@@ -63,3 +63,19 @@ def find_n_records_before(
         target_ids,
         target_datetime_ns,
     )
+
+
+def find_last_record_index(
+    query_ids: np.ndarray,
+    query_datetime: np.ndarray,
+    target_ids: np.ndarray,
+    target_datetime: np.ndarray,
+) -> np.ndarray:
+    query_datetime_ns = datetime_array_to_int(query_datetime)
+    target_datetime_ns = datetime_array_to_int(target_datetime)
+    return find_last_record_index_core(
+        query_ids,
+        query_datetime_ns,
+        target_ids,
+        target_datetime_ns,
+    )
