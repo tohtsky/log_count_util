@@ -22,7 +22,7 @@ jobs:
           LOG_COUNT_UTIL_TESTING="true" python setup.py develop
       - name: Run pytest
         run: |
-          pip install pytest pytest-cov
+          pip install pytest pytest-cov pandas
           pytest --cov=./log_count_util tests/
       - name: Generate coverage (ubuntu)
         run: |
