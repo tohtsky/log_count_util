@@ -1,5 +1,7 @@
 # log-count-utils
 
+## Introduction & Usage
+
 Suppose we have an action log data `df` like
 
 | user_id | timestamp           | expense |

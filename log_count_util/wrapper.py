@@ -1,7 +1,6 @@
 from datetime import timedelta
 
 import numpy as np
-from numpy import typing as npt
 
 from ._core import find_last_record_index as find_last_record_index_core
 from ._core import find_n_record_before as find_n_record_before_core
