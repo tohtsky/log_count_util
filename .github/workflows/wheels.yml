@@ -2,7 +2,7 @@ name: Build
 on:
   push:
     branches:
-      - build_wheel
+      - main
   release:
     types:
       - created
